@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CampusConnect | Internship Portal</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    color: #172033;
+}
+
+/* Navbar */
+nav {
+    background: #172554;
+    color: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 70px 8%;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.search-box button {
+    background: #f59e0b;
+    border: none;
+    padding: 0 25px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 35px 8%;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: white;
+    padding: 25px 45px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px #00000010;
+}
+
+.stat h2 {
+    color: #2563eb;
+}
+
+/* Main */
+.container {
+    padding: 30px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.filters {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.filters button {
+    padding: 10px 18px;
+    margin: 5px;
+    border: 1px solid #2563eb;
+    background: white;
+    color: #2563eb;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background: #2563eb;
+    color: white;
+}
+
+/* Cards */
+.jobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px #00000012;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #1e3a8a;
+}
+
+.company {
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.tag {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.apply-btn {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.apply-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Footer */
+footer {
+    margin-top: 60px;
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* Mobile */
+@media(max-width:600px) {
+
+    nav {
+        padding: 15px 5%;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 50px 5%;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .search-box {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-box button {
+        padding: 12px;
+    }
+
+    .container {
+        padding: 25px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">🎓 CampusConnect</div>
+
+    <div>
+        <a href="#">Home</a>
+        <a href="#internships">Internships</a>
+    </div>
+</nav>
+
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <h1>Find Your Dream Internship 🚀</h1>
+
+    <p>
+        Discover internships, build your career,
+        and connect with top companies.
+    </p>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search internships..."
+            onkeyup="searchJobs()"
+        >
+
+        <button onclick="searchJobs()">
+            Search
+        </button>
+    </div>
+
+</section>
+
+
+<!-- Statistics -->
+<section class="stats">
+
+    <div class="stat">
+        <h2>500+</h2>
+        <p>Internships</p>
+    </div>
+
+    <div class="stat">
+        <h2>120+</h2>
+        <p>Companies</p>
+    </div>
+
+    <div class="stat">
+        <h2>2,000+</h2>
+        <p>Students</p>
+    </div>
+
+</section>
+
+
+<!-- Internship Section -->
+<section class="container" id="internships">
+
+    <div class="section-title">
+        <h2>Latest Internships</h2>
+        <p>Explore opportunities and start your career journey.</p>
+    </div>
+
+
+    <div class="filters">
+
+        <button onclick="filterJobs('all')">
+            All
+        </button>
+
+        <button onclick="filterJobs('Web Development')">
+            Web Development
+        </button>
+
+        <button onclick="filterJobs('AI')">
+            AI / ML
+        </button>
+
+        <button onclick="filterJobs('Data Science')">
+            Data Science
+        </button>
+
+    </div>
+
+
+    <div class="jobs" id="jobList">
+
+        <div class="card" data-category="Web Development">
+
+            <span class="tag">Web Development</span>
+
+            <h3>Frontend Developer Intern</h3>
+
+            <p class="company">TechNova Solutions</p>
+
+            <p>📍 Chennai</p>
+            <p>⏱ 3 Months</p>
+
+            <br>
+
+            <button
+                class="apply-btn"
+                onclick="apply('Frontend Developer Intern')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="card" data-category="AI">
+
+            <span class="tag">AI / ML</span>
+
+            <h3>Machine Learning Intern</
