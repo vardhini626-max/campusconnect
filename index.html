@@ -7,227 +7,354 @@
 <title>CampusConnect - Internship Portal</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-body {
-    background: #f5f7fb;
-    color: #172033;
+body{
+    background:#f5f7fb;
+    color:#172033;
 }
 
-/* Navbar */
-nav {
-    background: #172554;
-    color: white;
-    padding: 18px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* NAVBAR */
+nav{
+    background:#172554;
+    color:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
+.logo{
+    font-size:24px;
+    font-weight:bold;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 25px;
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
 }
 
-/* Hero */
-.hero {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: white;
-    padding: 70px 8%;
-    text-align: center;
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
 }
 
-.hero h1 {
-    font-size: 45px;
-    margin-bottom: 15px;
+.nav-btn{
+    background:white;
+    color:#172554 !important;
+    padding:9px 16px;
+    border-radius:20px;
+    font-weight:bold;
 }
 
-.hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#172554,#2563eb);
+    color:white;
+    text-align:center;
+    padding:80px 20px;
 }
 
-.search-box {
-    max-width: 650px;
-    margin: auto;
-    display: flex;
-    background: white;
-    padding: 8px;
-    border-radius: 10px;
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
 }
 
-.search-box input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 15px;
-    font-size: 16px;
+.hero p{
+    font-size:19px;
+    margin-bottom:30px;
 }
 
-.search-box button {
-    background: #f59e0b;
-    border: none;
-    padding: 0 25px;
-    border-radius: 8px;
-    font-weight: bold;
+.search-box{
+    max-width:650px;
+    margin:auto;
+    display:flex;
+    background:white;
+    padding:8px;
+    border-radius:10px;
 }
 
-/* Stats */
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    padding: 35px 8%;
-    flex-wrap: wrap;
+.search-box input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:14px;
+    font-size:16px;
 }
 
-.stat {
-    background: white;
-    padding: 25px 45px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 15px #00000010;
+.search-box button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:0 25px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-.stat h2 {
-    color: #2563eb;
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    padding:35px 20px;
+    background:white;
 }
 
-/* Main */
-.container {
-    padding: 30px 8%;
+.stat{
+    text-align:center;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 25px;
+.stat h2{
+    color:#2563eb;
 }
 
-.filters {
-    text-align: center;
-    margin-bottom: 30px;
+/* MAIN */
+.container{
+    width:84%;
+    margin:50px auto;
 }
 
-.filters button {
-    padding: 10px 18px;
-    margin: 5px;
-    border: 1px solid #2563eb;
-    background: white;
-    color: #2563eb;
-    border-radius: 20px;
-    cursor: pointer;
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
 }
 
-.filters button:hover {
-    background: #2563eb;
-    color: white;
+.section-title h2{
+    font-size:32px;
 }
 
-/* Cards */
-.jobs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
+/* FILTERS */
+.filters{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
 }
 
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 18px #00000012;
-    transition: 0.3s;
+.filter{
+    border:1px solid #2563eb;
+    background:white;
+    color:#2563eb;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.filter.active,
+.filter:hover{
+    background:#2563eb;
+    color:white;
 }
 
-.card h3 {
-    margin-bottom: 10px;
-    color: #1e3a8a;
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
 }
 
-.company {
-    color: #64748b;
-    margin-bottom: 15px;
+.card{
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
 }
 
-.tag {
-    display: inline-block;
-    background: #dbeafe;
-    color: #1d4ed8;
-    padding: 6px 10px;
-    border-radius: 15px;
-    font-size: 13px;
-    margin-bottom: 15px;
+.card:hover{
+    transform:translateY(-5px);
 }
 
-.apply-btn {
-    width: 100%;
-    padding: 12px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
+.card-top{
+    display:flex;
+    justify-content:space-between;
 }
 
-.apply-btn:hover {
-    background: #1d4ed8;
+.company{
+    color:#64748b;
+    margin:8px 0;
 }
 
-/* Footer */
-footer {
-    margin-top: 60px;
-    background: #172554;
-    color: white;
-    text-align: center;
-    padding: 30px;
+.location{
+    color:#475569;
+    margin:8px 0;
 }
 
-/* Mobile */
-@media(max-width:600px) {
+.tags{
+    margin:15px 0;
+}
 
-    nav {
-        padding: 15px 5%;
+.tag{
+    display:inline-block;
+    background:#e0e7ff;
+    color:#3730a3;
+    padding:5px 10px;
+    border-radius:15px;
+    font-size:12px;
+    margin-right:5px;
+}
+
+.card-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.apply-btn{
+    flex:1;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:11px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.save-btn{
+    background:#f1f5f9;
+    border:none;
+    padding:11px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+/* DASHBOARD */
+.dashboard{
+    background:#eef4ff;
+    padding:60px 8%;
+    margin-top:50px;
+}
+
+.dashboard-box{
+    max-width:1000px;
+    margin:auto;
+}
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin:25px 0;
+}
+
+.dash-card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.dash-card h2{
+    color:#2563eb;
+}
+
+.applications{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+}
+
+.application{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+.status{
+    background:#dcfce7;
+    color:#166534;
+    padding:6px 12px;
+    border-radius:15px;
+    font-size:13px;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+}
+
+.modal-box{
+    background:white;
+    width:90%;
+    max-width:500px;
+    padding:30px;
+    border-radius:15px;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box textarea{
+    width:100%;
+    padding:12px;
+    margin:8px 0 15px;
+    border:1px solid #ccc;
+    border-radius:7px;
+}
+
+.submit-btn{
+    width:100%;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:13px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:22px;
+}
+
+/* FOOTER */
+footer{
+    background:#172554;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:50px;
+}
+
+@media(max-width:700px){
+    .hero h1{
+        font-size:34px;
     }
 
-    nav a {
-        margin-left: 10px;
-        font-size: 13px;
+    .stats{
+        gap:20px;
+        flex-wrap:wrap;
     }
 
-    .hero {
-        padding: 50px 5%;
+    .nav-links{
+        gap:10px;
     }
 
-    .hero h1 {
-        font-size: 32px;
-    }
-
-    .search-box {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .search-box button {
-        padding: 12px;
-    }
-
-    .container {
-        padding: 25px 5%;
+    .nav-links a:not(.nav-btn){
+        display:none;
     }
 }
 </style>
@@ -235,36 +362,37 @@ footer {
 
 <body>
 
-<!-- Navigation -->
+<!-- NAVBAR -->
 <nav>
     <div class="logo">🎓 CampusConnect</div>
 
-    <div>
-        <a href="#">Home</a>
+    <div class="nav-links">
+        <a href="#home">Home</a>
         <a href="#internships">Internships</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#dashboard" class="nav-btn">Student Portal</a>
     </div>
 </nav>
 
 
-<!-- Hero Section -->
-<section class="hero">
+<!-- HERO -->
+<section class="hero" id="home">
 
     <h1>Find Your Dream Internship 🚀</h1>
 
     <p>
-        Discover internships, build your career,
-        and connect with top companies.
+        Discover internships, build your skills and start your career.
     </p>
 
     <div class="search-box">
         <input
             type="text"
-            id="search"
-            placeholder="Search internships..."
-            onkeyup="searchJobs()"
+            id="searchInput"
+            placeholder="Search internships, skills or companies..."
+            onkeyup="searchInternships()"
         >
 
-        <button onclick="searchJobs()">
+        <button onclick="searchInternships()">
             Search
         </button>
     </div>
@@ -272,7 +400,7 @@ footer {
 </section>
 
 
-<!-- Statistics -->
+<!-- STATS -->
 <section class="stats">
 
     <div class="stat">
@@ -293,62 +421,526 @@ footer {
 </section>
 
 
-<!-- Internship Section -->
+<!-- INTERNSHIPS -->
 <section class="container" id="internships">
 
     <div class="section-title">
         <h2>Latest Internships</h2>
-        <p>Explore opportunities and start your career journey.</p>
+        <p>Explore opportunities from top companies</p>
     </div>
 
 
+    <!-- FILTERS -->
     <div class="filters">
 
-        <button onclick="filterJobs('all')">
+        <button class="filter active"
+                onclick="filterCategory('All',this)">
             All
         </button>
 
-        <button onclick="filterJobs('Web Development')">
+        <button class="filter"
+                onclick="filterCategory('Web Development',this)">
             Web Development
         </button>
 
-        <button onclick="filterJobs('AI')">
+        <button class="filter"
+                onclick="filterCategory('AI / ML',this)">
             AI / ML
         </button>
 
-        <button onclick="filterJobs('Data Science')">
+        <button class="filter"
+                onclick="filterCategory('Data Science',this)">
             Data Science
         </button>
 
     </div>
 
 
-    <div class="jobs" id="jobList">
+    <!-- CARDS -->
+    <div class="cards" id="internshipContainer">
 
-        <div class="card" data-category="Web Development">
 
-            <span class="tag">Web Development</span>
+        <!-- INTERNSHIP 1 -->
+        <div class="card internship"
+             data-category="Web Development">
 
-            <h3>Frontend Developer Intern</h3>
+            <div class="card-top">
+                <h3>Frontend Developer Intern</h3>
+                <button class="save-btn"
+                        onclick="saveInternship(this)">
+                    ♡
+                </button>
+            </div>
 
             <p class="company">TechNova Solutions</p>
 
-            <p>📍 Chennai</p>
-            <p>⏱ 3 Months</p>
+            <p class="location">📍 Chennai</p>
 
-            <br>
+            <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+            </div>
 
-            <button
-                class="apply-btn"
-                onclick="apply('Frontend Developer Intern')">
-                Apply Now
-            </button>
+            <p>⏱ Duration: 3 Months</p>
+
+            <div class="card-buttons">
+
+                <button class="apply-btn"
+                        onclick="openApply('Frontend Developer Intern')">
+                    Apply Now
+                </button>
+
+            </div>
 
         </div>
 
 
-        <div class="card" data-category="AI">
+        <!-- INTERNSHIP 2 -->
+        <div class="card internship"
+             data-category="AI / ML">
 
-            <span class="tag">AI / ML</span>
+            <div class="card-top">
 
-            <h3>Machine Learning Intern</
+                <h3>Machine Learning Intern</h3>
+
+                <button class="save-btn"
+                        onclick="saveInternship(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <p class="company">AI Labs India</p>
+
+            <p class="location">📍 Bangalore</p>
+
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">ML</span>
+                <span class="tag">AI</span>
+            </div>
+
+            <p>⏱ Duration: 6 Months</p>
+
+            <div class="card-buttons">
+
+                <button class="apply-btn"
+                        onclick="openApply('Machine Learning Intern')">
+                    Apply Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- INTERNSHIP 3 -->
+        <div class="card internship"
+             data-category="Data Science">
+
+            <div class="card-top">
+
+                <h3>Data Analyst Intern</h3>
+
+                <button class="save-btn"
+                        onclick="saveInternship(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <p class="company">DataWorks Pvt Ltd</p>
+
+            <p class="location">📍 Hyderabad</p>
+
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">SQL</span>
+            </div>
+
+            <p>⏱ Duration: 4 Months</p>
+
+            <div class="card-buttons">
+
+                <button class="apply-btn"
+                        onclick="openApply('Data Analyst Intern')">
+                    Apply Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- INTERNSHIP 4 -->
+        <div class="card internship"
+             data-category="Web Development">
+
+            <div class="card-top">
+
+                <h3>Full Stack Developer Intern</h3>
+
+                <button class="save-btn"
+                        onclick="saveInternship(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <p class="company">CodeCraft Technologies</p>
+
+            <p class="location">📍 Chennai</p>
+
+            <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">React</span>
+                <span class="tag">SQL</span>
+            </div>
+
+            <p>⏱ Duration: 6 Months</p>
+
+            <div class="card-buttons">
+
+                <button class="apply-btn"
+                        onclick="openApply('Full Stack Developer Intern')">
+                    Apply Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDENT DASHBOARD -->
+<section class="dashboard" id="dashboard">
+
+    <div class="dashboard-box">
+
+        <div class="section-title">
+
+            <h2>👤 Student Dashboard</h2>
+
+            <p>
+                Track your internship applications
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-cards">
+
+            <div class="dash-card">
+
+                <h2>4</h2>
+
+                <p>Available Internships</p>
+
+            </div>
+
+
+            <div class="dash-card">
+
+                <h2 id="applicationCount">0</h2>
+
+                <p>Applications</p>
+
+            </div>
+
+
+            <div class="dash-card">
+
+                <h2>2</h2>
+
+                <p>Saved Internships</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="applications">
+
+            <h3>📋 My Applications</h3>
+
+            <br>
+
+            <div id="applicationList">
+
+                <p>
+                    No applications yet.
+                    Click <b>Apply Now</b> to get started.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- APPLY MODAL -->
+<div class="modal" id="applyModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeApply()">
+            ✕
+        </span>
+
+        <h2>📝 Apply for Internship</h2>
+
+        <p id="selectedInternship"></p>
+
+        <form onsubmit="submitApplication(event)">
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="studentEmail"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="text"
+                id="studentCollege"
+                placeholder="College Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="studentSkills"
+                placeholder="Skills (Java, Python, etc.)"
+                required
+            >
+
+            <textarea
+                id="studentMessage"
+                rows="4"
+                placeholder="Why should we select you?"
+                required>
+            </textarea>
+
+            <button class="submit-btn">
+                Submit Application 🚀
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>🎓 CampusConnect</h3>
+
+    <p>
+        Student Internship & Placement Portal
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 CampusConnect. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* SEARCH */
+function searchInternships(){
+
+    let input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".internship");
+
+    cards.forEach(function(card){
+
+        let text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* CATEGORY FILTER */
+function filterCategory(category, button){
+
+    let cards =
+        document.querySelectorAll(".internship");
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+
+    cards.forEach(function(card){
+
+        if(category === "All" ||
+           card.dataset.category === category){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* SAVE */
+function saveInternship(button){
+
+    if(button.innerText === "♡"){
+
+        button.innerText = "♥";
+
+        alert("Internship saved successfully! ❤️");
+
+    }else{
+
+        button.innerText = "♡";
+
+        alert("Internship removed from saved list.");
+
+    }
+
+}
+
+
+/* OPEN APPLY MODAL */
+let selectedInternship = "";
+
+function openApply(name){
+
+    selectedInternship = name;
+
+    document.getElementById("selectedInternship")
+        .innerText =
+        "Applying for: " + name;
+
+    document.getElementById("applyModal")
+        .style.display = "flex";
+
+}
+
+
+/* CLOSE MODAL */
+function closeApply(){
+
+    document.getElementById("applyModal")
+        .style.display = "none";
+
+}
+
+
+/* SUBMIT APPLICATION */
+function submitApplication(event){
+
+    event.preventDefault();
+
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let email =
+        document.getElementById("studentEmail").value;
+
+
+    let list =
+        document.getElementById("applicationList");
+
+
+    list.innerHTML = `
+
+        <div class="application">
+
+            <div>
+
+                <strong>
+                    ${selectedInternship}
+                </strong>
+
+                <br>
+
+                <small>
+                    ${name} • ${email}
+                </small>
+
+            </div>
+
+            <span class="status">
+                Applied
+            </span>
+
+        </div>
+
+    `;
+
+
+    document.getElementById("applicationCount")
+        .innerText = "1";
+
+
+    closeApply();
+
+
+    alert(
+        "Application submitted successfully! 🎉"
+    );
+
+
+    document.querySelector("form").reset();
+
+}
+
+</script>
+
+</body>
+</html>
