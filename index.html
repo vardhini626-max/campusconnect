@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CampusConnect | Internship Portal</title>
 
 <style>
@@ -33,13 +32,26 @@ nav{
     font-weight:bold;
 }
 
-nav button{
-    background:#2563eb;
-    color:white;
+.nav-buttons{
+    display:flex;
+    gap:10px;
+}
+
+button{
     border:none;
-    padding:10px 18px;
+    padding:10px 16px;
     border-radius:8px;
     cursor:pointer;
+}
+
+.student-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.company-btn{
+    background:#7c3aed;
+    color:white;
 }
 
 .hero{
@@ -97,15 +109,11 @@ nav button{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
-    margin-bottom:25px;
+    margin:20px 0;
 }
 
 .filters button{
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
     background:#e5e7eb;
-    cursor:pointer;
 }
 
 .filters button.active{
@@ -128,7 +136,7 @@ nav button{
 
 .card h3{
     color:#1d4ed8;
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
 .card p{
@@ -136,24 +144,18 @@ nav button{
     color:#555;
 }
 
-.card button{
-    margin-top:15px;
-    padding:10px 15px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-}
-
 .apply{
     background:#2563eb;
     color:white;
+    margin-top:12px;
 }
 
 .save{
     background:#e5e7eb;
+    margin-top:12px;
 }
 
-.dashboard{
+.company-section{
     margin-top:50px;
     background:white;
     padding:30px;
@@ -161,47 +163,59 @@ nav button{
     box-shadow:0 3px 15px #ddd;
 }
 
-.profile{
+.company-section h2{
+    margin-bottom:10px;
+}
+
+.form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:20px;
+    gap:15px;
     margin-top:20px;
 }
 
-.profile input{
-    padding:12px;
+input,select,textarea{
+    width:100%;
+    padding:13px;
     border:1px solid #ccc;
     border-radius:8px;
 }
 
-.resume{
-    margin-top:25px;
-    padding:20px;
-    background:#f3f4f6;
-    border-radius:10px;
+textarea{
+    min-height:100px;
+    resize:vertical;
 }
 
-.resume input{
-    margin-top:10px;
+.full{
+    grid-column:1 / -1;
+}
+
+.publish{
+    margin-top:20px;
+    background:#7c3aed;
+    color:white;
+    font-size:16px;
+}
+
+.posted{
+    margin-top:35px;
 }
 
 .modal{
     display:none;
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    inset:0;
     background:rgba(0,0,0,.6);
     justify-content:center;
     align-items:center;
+    z-index:10;
 }
 
 .modal-box{
     background:white;
     padding:30px;
     width:90%;
-    max-width:500px;
+    max-width:450px;
     border-radius:15px;
 }
 
@@ -209,53 +223,24 @@ nav button{
     margin-bottom:20px;
 }
 
-.modal-box input,
-.modal-box textarea{
-    width:100%;
-    padding:12px;
+.modal-box input{
     margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
 }
 
-.modal-box button{
-    padding:12px 18px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.submit{
-    background:#2563eb;
+.login{
+    width:100%;
+    background:#7c3aed;
     color:white;
+    margin-top:10px;
 }
 
 .close{
     background:#ddd;
+    margin-top:10px;
 }
 
-.login-box{
-    max-width:400px;
-}
-
-.login-box input{
-    width:100%;
-    padding:13px;
-    margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
-
-.login-btn{
-    width:100%;
-    background:#2563eb;
-    color:white;
-}
-
-#loginStatus{
+.message{
     margin-top:15px;
-    color:green;
     font-weight:bold;
 }
 
@@ -271,16 +256,20 @@ footer{
 
     .stats,
     .cards,
-    .profile{
+    .form-grid{
         grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
     }
 
     .hero h1{
         font-size:30px;
     }
 
-    nav{
-        padding:15px 5%;
+    .nav-buttons{
+        flex-direction:column;
     }
 }
 </style>
@@ -288,310 +277,359 @@ footer{
 
 <body>
 
-<nav>
-    <div class="logo">CampusConnect 🎓</div>
+<!-- NAVBAR -->
 
-    <button onclick="openLogin()">Login</button>
+<nav>
+
+    <div class="logo">
+        CampusConnect 🎓
+    </div>
+
+    <div class="nav-buttons">
+
+        <button class="student-btn"
+                onclick="openStudentLogin()">
+            Student Login
+        </button>
+
+        <button class="company-btn"
+                onclick="openCompanyLogin()">
+            Company Login
+        </button>
+
+    </div>
+
 </nav>
+
+
+<!-- HERO -->
 
 <section class="hero">
 
     <h1>Find Your Dream Internship 🚀</h1>
 
-    <p>Discover internships, build your profile and start your career.</p>
+    <p>
+        Connect students with companies and career opportunities.
+    </p>
 
     <input
         class="search"
         id="search"
-        type="text"
         placeholder="Search internships..."
         onkeyup="searchInternships()"
     >
 
 </section>
 
+
 <div class="container">
 
-    <div class="stats">
 
-        <div class="stat">
-            <h2>500+</h2>
-            <p>Internships</p>
-        </div>
+<!-- STATS -->
 
-        <div class="stat">
-            <h2>120+</h2>
-            <p>Companies</p>
-        </div>
+<div class="stats">
 
-        <div class="stat">
-            <h2>2000+</h2>
-            <p>Students</p>
-        </div>
-
+    <div class="stat">
+        <h2>500+</h2>
+        <p>Internships</p>
     </div>
 
-    <h2>Browse Internships</h2>
-
-    <div class="filters">
-
-        <button class="active" onclick="filterCategory('All',this)">
-            All
-        </button>
-
-        <button onclick="filterCategory('Web Development',this)">
-            Web Development
-        </button>
-
-        <button onclick="filterCategory('AI / ML',this)">
-            AI / ML
-        </button>
-
-        <button onclick="filterCategory('Data Science',this)">
-            Data Science
-        </button>
-
+    <div class="stat">
+        <h2>120+</h2>
+        <p>Companies</p>
     </div>
 
-    <div class="cards" id="internshipList">
-
-        <div class="card" data-category="Web Development">
-
-            <h3>Frontend Developer Intern</h3>
-
-            <p>🏢 TechNova Solutions</p>
-            <p>📍 Chennai</p>
-            <p>⏳ 3 Months</p>
-            <p>💻 Web Development</p>
-
-            <button class="apply"
-                onclick="openApply('Frontend Developer Intern')">
-                Apply Now
-            </button>
-
-            <button class="save"
-                onclick="saveInternship(this)">
-                ☆ Save
-            </button>
-
-        </div>
-
-        <div class="card" data-category="AI / ML">
-
-            <h3>Machine Learning Intern</h3>
-
-            <p>🏢 AI Labs India</p>
-            <p>📍 Bangalore</p>
-            <p>⏳ 6 Months</p>
-            <p>🤖 AI / ML</p>
-
-            <button class="apply"
-                onclick="openApply('Machine Learning Intern')">
-                Apply Now
-            </button>
-
-            <button class="save"
-                onclick="saveInternship(this)">
-                ☆ Save
-            </button>
-
-        </div>
-
-        <div class="card" data-category="Data Science">
-
-            <h3>Data Analyst Intern</h3>
-
-            <p>🏢 DataWorks Pvt Ltd</p>
-            <p>📍 Hyderabad</p>
-            <p>⏳ 4 Months</p>
-            <p>📊 Data Science</p>
-
-            <button class="apply"
-                onclick="openApply('Data Analyst Intern')">
-                Apply Now
-            </button>
-
-            <button class="save"
-                onclick="saveInternship(this)">
-                ☆ Save
-            </button>
-
-        </div>
-
-        <div class="card" data-category="Web Development">
-
-            <h3>Full Stack Developer Intern</h3>
-
-            <p>🏢 CodeCraft Technologies</p>
-            <p>📍 Chennai</p>
-            <p>⏳ 6 Months</p>
-            <p>💻 Web Development</p>
-
-            <button class="apply"
-                onclick="openApply('Full Stack Developer Intern')">
-                Apply Now
-            </button>
-
-            <button class="save"
-                onclick="saveInternship(this)">
-                ☆ Save
-            </button>
-
-        </div>
-
+    <div class="stat">
+        <h2>2000+</h2>
+        <p>Students</p>
     </div>
 
+</div>
 
-    <div class="dashboard">
 
-        <h2>👤 Student Dashboard</h2>
+<!-- INTERNSHIPS -->
 
-        <p style="margin-top:10px">
-            Manage your profile, resume and applications.
-        </p>
+<h2>Available Internships</h2>
 
-        <div class="profile">
+<div class="filters">
 
-            <input id="profileName"
-                placeholder="Full Name">
+    <button class="active"
+            onclick="filterCategory('All',this)">
+        All
+    </button>
 
-            <input id="profileEmail"
-                placeholder="Email">
+    <button onclick="filterCategory('Web Development',this)">
+        Web Development
+    </button>
 
-            <input id="profileCollege"
-                placeholder="College">
+    <button onclick="filterCategory('AI / ML',this)">
+        AI / ML
+    </button>
 
-            <input id="profileSkills"
-                placeholder="Skills">
+    <button onclick="filterCategory('Data Science',this)">
+        Data Science
+    </button>
 
-        </div>
+</div>
+
+
+<div class="cards" id="internshipList">
+
+    <div class="card"
+         data-category="Web Development">
+
+        <h3>Frontend Developer Intern</h3>
+
+        <p>🏢 TechNova Solutions</p>
+        <p>📍 Chennai</p>
+        <p>⏳ 3 Months</p>
+        <p>💻 Web Development</p>
 
         <button class="apply"
-            onclick="saveProfile()">
-            Save Profile
+                onclick="applyJob('Frontend Developer Intern')">
+            Apply Now
         </button>
 
-        <div class="resume">
+        <button class="save"
+                onclick="saveJob(this)">
+            ☆ Save
+        </button>
 
-            <h3>📄 Upload Resume</h3>
+    </div>
 
-            <p>Select your resume PDF.</p>
 
-            <input
-                type="file"
-                id="resume"
-                accept=".pdf"
-                onchange="showResume()"
-            >
+    <div class="card"
+         data-category="AI / ML">
 
-            <p id="resumeName"></p>
+        <h3>Machine Learning Intern</h3>
 
-        </div>
+        <p>🏢 AI Labs India</p>
+        <p>📍 Bangalore</p>
+        <p>⏳ 6 Months</p>
+        <p>🤖 AI / ML</p>
 
-        <div style="margin-top:25px">
+        <button class="apply"
+                onclick="applyJob('Machine Learning Intern')">
+            Apply Now
+        </button>
 
-            <h3>📋 My Applications</h3>
+        <button class="save"
+                onclick="saveJob(this)">
+            ☆ Save
+        </button>
 
-            <p id="applicationCount">
-                No applications yet.
-            </p>
+    </div>
 
-        </div>
+
+    <div class="card"
+         data-category="Data Science">
+
+        <h3>Data Analyst Intern</h3>
+
+        <p>🏢 DataWorks Pvt Ltd</p>
+        <p>📍 Hyderabad</p>
+        <p>⏳ 4 Months</p>
+        <p>📊 Data Science</p>
+
+        <button class="apply"
+                onclick="applyJob('Data Analyst Intern')">
+            Apply Now
+        </button>
+
+        <button class="save"
+                onclick="saveJob(this)">
+            ☆ Save
+        </button>
+
+    </div>
+
+
+    <div class="card"
+         data-category="Web Development">
+
+        <h3>Full Stack Developer Intern</h3>
+
+        <p>🏢 CodeCraft Technologies</p>
+
+        <p>📍 Chennai</p>
+
+        <p>⏳ 6 Months</p>
+
+        <p>💻 Web Development</p>
+
+        <button class="apply"
+                onclick="applyJob('Full Stack Developer Intern')">
+            Apply Now
+        </button>
+
+        <button class="save"
+                onclick="saveJob(this)">
+            ☆ Save
+        </button>
 
     </div>
 
 </div>
 
 
-<!-- LOGIN MODAL -->
+<!-- COMPANY DASHBOARD -->
 
-<div class="modal" id="loginModal">
+<section class="company-section">
 
-    <div class="modal-box login-box">
+    <h2>🏢 Company Dashboard</h2>
 
-        <h2>🔐 Student Login</h2>
+    <p>
+        Companies can publish internship opportunities for students.
+    </p>
+
+
+    <div class="form-grid">
 
         <input
-            type="email"
-            id="loginEmail"
-            placeholder="Email Address"
+            id="companyName"
+            placeholder="Company Name"
         >
 
         <input
+            id="jobTitle"
+            placeholder="Internship Title"
+        >
+
+        <input
+            id="jobLocation"
+            placeholder="Location"
+        >
+
+        <input
+            id="jobDuration"
+            placeholder="Duration e.g. 3 Months"
+        >
+
+        <select id="jobCategory">
+
+            <option value="">
+                Select Category
+            </option>
+
+            <option value="Web Development">
+                Web Development
+            </option>
+
+            <option value="AI / ML">
+                AI / ML
+            </option>
+
+            <option value="Data Science">
+                Data Science
+            </option>
+
+        </select>
+
+        <input
+            id="jobSkills"
+            placeholder="Required Skills"
+        >
+
+        <textarea
+            class="full"
+            id="jobDescription"
+            placeholder="Internship Description"
+        ></textarea>
+
+    </div>
+
+
+    <button class="publish"
+            onclick="publishInternship()">
+
+        🚀 Publish Internship
+
+    </button>
+
+
+    <div class="posted">
+
+        <h2>📢 Recently Posted Internships</h2>
+
+        <div id="companyJobs"></div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- STUDENT LOGIN -->
+
+<div class="modal" id="studentModal">
+
+    <div class="modal-box">
+
+        <h2>🎓 Student Login</h2>
+
+        <input
+            id="studentEmail"
+            type="email"
+            placeholder="Student Email"
+        >
+
+        <input
+            id="studentPassword"
             type="password"
-            id="loginPassword"
             placeholder="Password"
         >
 
-        <button class="login-btn"
-            onclick="login()">
+        <button class="login"
+                onclick="studentLogin()">
             Login
         </button>
 
         <button class="close"
-            onclick="closeLogin()">
+                onclick="closeStudentLogin()">
             Close
         </button>
 
-        <p id="loginStatus"></p>
+        <p class="message"
+           id="studentMessage"></p>
 
     </div>
 
 </div>
 
 
-<!-- APPLICATION MODAL -->
+<!-- COMPANY LOGIN -->
 
-<div class="modal" id="applyModal">
+<div class="modal" id="companyModal">
 
     <div class="modal-box">
 
-        <h2>📝 Apply for Internship</h2>
+        <h2>🏢 Company Login</h2>
 
-        <form onsubmit="submitApplication(event)">
+        <input
+            id="companyEmail"
+            type="email"
+            placeholder="Company Email"
+        >
 
-            <input
-                id="applyName"
-                placeholder="Full Name"
-                required
-            >
+        <input
+            id="companyPassword"
+            type="password"
+            placeholder="Password"
+        >
 
-            <input
-                id="applyEmail"
-                type="email"
-                placeholder="Email Address"
-                required
-            >
+        <button class="login"
+                onclick="companyLogin()">
+            Login
+        </button>
 
-            <input
-                id="applyCollege"
-                placeholder="College Name"
-                required
-            >
+        <button class="close"
+                onclick="closeCompanyLogin()">
+            Close
+        </button>
 
-            <input
-                id="applySkills"
-                placeholder="Skills"
-                required
-            >
-
-            <textarea
-                id="applyReason"
-                placeholder="Why should we select you?"
-                required
-            ></textarea>
-
-            <button class="submit">
-                Submit Application
-            </button>
-
-            <button type="button"
-                class="close"
-                onclick="closeApply()">
-                Cancel
-            </button>
-
-        </form>
+        <p class="message"
+           id="companyMessage"></p>
 
     </div>
 
@@ -600,110 +638,103 @@ footer{
 
 <footer>
 
-    <p>© 2026 CampusConnect | Student Internship & Placement Portal</p>
+    <p>
+        © 2026 CampusConnect |
+        Student Internship & Placement Portal
+    </p>
 
 </footer>
 
 
 <script>
 
-let selectedInternship = "";
-let applications = 0;
-
-
 /* LOGIN */
 
-function openLogin(){
+function openStudentLogin(){
 
-    document.getElementById("loginModal").style.display="flex";
-
-}
-
-function closeLogin(){
-
-    document.getElementById("loginModal").style.display="none";
+    document.getElementById("studentModal")
+        .style.display="flex";
 
 }
 
-function login(){
+function closeStudentLogin(){
+
+    document.getElementById("studentModal")
+        .style.display="none";
+
+}
+
+function openCompanyLogin(){
+
+    document.getElementById("companyModal")
+        .style.display="flex";
+
+}
+
+function closeCompanyLogin(){
+
+    document.getElementById("companyModal")
+        .style.display="none";
+
+}
+
+
+function studentLogin(){
 
     let email =
-        document.getElementById("loginEmail").value;
+        document.getElementById("studentEmail").value;
 
     let password =
-        document.getElementById("loginPassword").value;
+        document.getElementById("studentPassword").value;
 
-    if(email === "" || password === ""){
+    if(email==="" || password===""){
 
-        document.getElementById("loginStatus").style.color="red";
+        document.getElementById("studentMessage")
+            .style.color="red";
 
-        document.getElementById("loginStatus").innerText =
-            "Please enter email and password.";
+        document.getElementById("studentMessage")
+            .innerText="Enter email and password.";
 
         return;
-
     }
 
-    localStorage.setItem("userEmail",email);
+    localStorage.setItem("studentEmail",email);
 
-    document.getElementById("loginStatus").style.color="green";
+    document.getElementById("studentMessage")
+        .style.color="green";
 
-    document.getElementById("loginStatus").innerText =
-        "Login successful! 🎉";
-
-}
-
-
-/* APPLY */
-
-function openApply(name){
-
-    selectedInternship = name;
-
-    document.getElementById("applyModal").style.display="flex";
-
-}
-
-function closeApply(){
-
-    document.getElementById("applyModal").style.display="none";
-
-}
-
-function submitApplication(event){
-
-    event.preventDefault();
-
-    applications++;
-
-    document.getElementById("applicationCount").innerText =
-        applications + " application submitted successfully for " +
-        selectedInternship + " 🎉";
-
-    closeApply();
-
-    alert("Application submitted successfully!");
+    document.getElementById("studentMessage")
+        .innerText="Student login successful! 🎉";
 
 }
 
 
-/* SAVE */
+function companyLogin(){
 
-function saveInternship(button){
+    let email =
+        document.getElementById("companyEmail").value;
 
-    if(button.innerText.includes("Save")){
+    let password =
+        document.getElementById("companyPassword").value;
 
-        button.innerText="★ Saved";
+    if(email==="" || password===""){
 
-        button.style.background="#facc15";
+        document.getElementById("companyMessage")
+            .style.color="red";
 
-    }else{
+        document.getElementById("companyMessage")
+            .innerText="Enter email and password.";
 
-        button.innerText="☆ Save";
-
-        button.style.background="#e5e7eb";
-
+        return;
     }
+
+    localStorage.setItem("companyEmail",email);
+
+    document.getElementById("companyMessage")
+        .style.color="green";
+
+    document.getElementById("companyMessage")
+        .innerText="Company login successful! 🎉";
 
 }
 
@@ -713,47 +744,17 @@ function saveInternship(button){
 function searchInternships(){
 
     let search =
-        document.getElementById("search").value.toLowerCase();
-
-    let cards =
-        document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-
-        let text =
-            card.innerText.toLowerCase();
-
-        if(text.includes(search)){
-
-            card.style.display="block";
-
-        }else{
-
-            card.style.display="none";
-
-        }
-
-    });
-
-}
-
-
-/* FILTER */
-
-function filterCategory(category,button){
-
-    document
-        .querySelectorAll(".filters button")
-        .forEach(btn => btn.classList.remove("active"));
-
-    button.classList.add("active");
+        document.getElementById("search")
+        .value
+        .toLowerCase();
 
     document
         .querySelectorAll(".card")
         .forEach(card => {
 
-            if(category === "All" ||
-               card.dataset.category === category){
+            if(card.innerText
+                .toLowerCase()
+                .includes(search)){
 
                 card.style.display="block";
 
@@ -768,66 +769,174 @@ function filterCategory(category,button){
 }
 
 
-/* PROFILE */
+/* FILTER */
 
-function saveProfile(){
+function filterCategory(category,button){
 
-    let name =
-        document.getElementById("profileName").value;
+    document
+        .querySelectorAll(".filters button")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
 
-    let email =
-        document.getElementById("profileEmail").value;
+    button.classList.add("active");
 
-    let college =
-        document.getElementById("profileCollege").value;
+    document
+        .querySelectorAll(".card")
+        .forEach(card => {
 
-    let skills =
-        document.getElementById("profileSkills").value;
+            if(category==="All" ||
+               card.dataset.category===category){
 
-    localStorage.setItem("profileName",name);
-    localStorage.setItem("profileEmail",email);
-    localStorage.setItem("profileCollege",college);
-    localStorage.setItem("profileSkills",skills);
+                card.style.display="block";
 
-    alert("Profile saved successfully! ✅");
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
 
 }
 
 
-/* RESUME */
+/* SAVE */
 
-function showResume(){
+function saveJob(button){
 
-    let file =
-        document.getElementById("resume").files[0];
+    if(button.innerText.includes("Save")){
 
-    if(file){
+        button.innerText="★ Saved";
 
-        document.getElementById("resumeName").innerText =
-            "Selected Resume: " + file.name + " 📄";
+    }else{
+
+        button.innerText="☆ Save";
 
     }
 
 }
 
 
-/* LOAD PROFILE */
+/* APPLY */
 
-window.onload = function(){
+function applyJob(job){
 
-    document.getElementById("profileName").value =
-        localStorage.getItem("profileName") || "";
+    alert(
+        "Application started for: " + job +
+        "\n\nStudent can submit application through the portal."
+    );
 
-    document.getElementById("profileEmail").value =
-        localStorage.getItem("profileEmail") || "";
+}
 
-    document.getElementById("profileCollege").value =
-        localStorage.getItem("profileCollege") || "";
 
-    document.getElementById("profileSkills").value =
-        localStorage.getItem("profileSkills") || "";
+/* PUBLISH INTERNSHIP */
 
-};
+function publishInternship(){
+
+    let company =
+        document.getElementById("companyName").value;
+
+    let title =
+        document.getElementById("jobTitle").value;
+
+    let location =
+        document.getElementById("jobLocation").value;
+
+    let duration =
+        document.getElementById("jobDuration").value;
+
+    let category =
+        document.getElementById("jobCategory").value;
+
+    let skills =
+        document.getElementById("jobSkills").value;
+
+    let description =
+        document.getElementById("jobDescription").value;
+
+
+    if(
+        company==="" ||
+        title==="" ||
+        location==="" ||
+        duration==="" ||
+        category==="" ||
+        skills==="" ||
+        description===""
+    ){
+
+        alert("Please fill all internship details.");
+
+        return;
+
+    }
+
+
+    let card =
+        document.createElement("div");
+
+    card.className="card";
+
+    card.dataset.category=category;
+
+    card.innerHTML=`
+
+        <h3>${title}</h3>
+
+        <p>🏢 ${company}</p>
+
+        <p>📍 ${location}</p>
+
+        <p>⏳ ${duration}</p>
+
+        <p>💻 ${category}</p>
+
+        <p>🛠 ${skills}</p>
+
+        <p>${description}</p>
+
+        <button class="apply"
+                onclick="applyJob('${title}')">
+
+            Apply Now
+
+        </button>
+
+        <button class="save"
+                onclick="saveJob(this)">
+
+            ☆ Save
+
+        </button>
+
+    `;
+
+
+    document
+        .getElementById("internshipList")
+        .appendChild(card);
+
+
+    document
+        .getElementById("companyJobs")
+        .appendChild(card.cloneNode(true));
+
+
+    alert(
+        "Internship published successfully! 🚀"
+    );
+
+
+    document.getElementById("companyName").value="";
+    document.getElementById("jobTitle").value="";
+    document.getElementById("jobLocation").value="";
+    document.getElementById("jobDuration").value="";
+    document.getElementById("jobCategory").value="";
+    document.getElementById("jobSkills").value="";
+    document.getElementById("jobDescription").value="";
+
+}
 
 </script>
 
