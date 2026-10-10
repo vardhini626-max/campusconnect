@@ -273,6 +273,7 @@ footer{
     }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -937,6 +938,13 @@ function publishInternship(){
     document.getElementById("jobDescription").value="";
 
 }
+const SUPABASE_URL = "https://qiyxybkaihbcbgcrnjpe.supabase.co/rest/v1/";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7eUdWVhbWhqcXOh_hurzZg_foizT79C";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
 
 </script>
 
